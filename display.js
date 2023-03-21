@@ -46,20 +46,26 @@ $(document).ready(function () {
                     $(".deleteBtn").on("click", function () {
                         var id = $(this).data("id");
                         var row = $(this).closest("tr");
-                        $.ajax({
-                            type: "POST",
-                            url: "delete.php",
-                            data: { id: id },
-                            success: function () {
+                        if (confirm("Are you sure , you want to delete this record")) {
+                            $.ajax({
+                                type: "POST",
+                                url: "delete.php",
+                                data: { id: id },
+                                success: function () {
 
-                                row.remove();
-                            }
-                        });
+                                    row.remove();
+                                }
+                            });
+
+                        }
+
                     });
                     $(".updateeBtn").on("click", function () {
                         var id = $(this).data("id");
                         sessionStorage.setItem("id", id);
-                        window.location.href = 'update.html';
+                        if (confirm("Are you sure , you want to delete this record")) {
+                            window.location.href = 'update.html';
+                        }
                     });
                 }
             }
