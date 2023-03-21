@@ -1,10 +1,15 @@
 <?php include 'connection.php';
 
 if ( $_SERVER[ 'REQUEST_METHOD' ] === 'POST' ) {
+
     $userid = $_POST[ 'userid' ];
+    if ( !( preg_match( '/^[0-9]{1,30}$/', $userid ) ) ) {
+        $result_arr[] = array( 'message'=>'Invalid User id' );
+        echo json_encode( $result_arr );
+        exit;
+    }
     $Title = $_POST[ 'Title' ];
     $Description = $_POST[ 'Description' ];
-
     $sql = "CREATE TABLE IF NOT EXISTS Post (
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         Title VARCHAR(100) NOT NULL,
@@ -49,7 +54,8 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] === 'POST' ) {
             );
         }
         echo json_encode( $return_arr );
-    } else {
-        echo '0 results';
-    }
+    } 
+    // else {
+    //     echo '0 results';
+    // }
 }
