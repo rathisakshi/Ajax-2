@@ -5,6 +5,7 @@
 body {
     background-color: #f2f2f2;
     font-family: Arial, sans-serif;
+    margin-top: 100px;
 }
 
 .main {
@@ -18,12 +19,14 @@ body {
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 50%;
+
 }
 
 h1 {
-    font-size: 24px;
+    font-size: 22px;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 form {
@@ -60,6 +63,7 @@ table {
 
     border-collapse: collapse;
     margin-top: 20px;
+    margin-left: 55px;
 }
 
 th {
@@ -77,5 +81,21 @@ td {
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: lightcyan;
+}
+
+.updateeBtn,
+.deleteBtn {
+    padding: 5px 15px 5px 15px;
+    color: black;
+    background-color: #00bfff;
+    font-size: 15px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5px;
+    width: 100%;
+
+    border-width: 1px 1px 3px;
+    /* box-shadow: 0 -1px 0 rgb(255 255 255 / 10%) inset; */
+    margin-bottom: 10px;
 }
