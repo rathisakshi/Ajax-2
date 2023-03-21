@@ -62,8 +62,8 @@ $(document).ready(function () {
                         window.location.href = 'update.html';
                     });
                 }
-                }
-            });
+            }
+        });
 
 
         event.preventDefault();

@@ -2,7 +2,6 @@
 
 if ( $_SERVER[ 'REQUEST_METHOD' ] === 'POST' ) {
 
-    
     $sql_select = 'SELECT * FROM Post';
     $result = $conn->query( $sql_select );
 
@@ -22,6 +21,6 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] === 'POST' ) {
             );
         }
         echo json_encode( $return_arr );
-    } 
-    
+    }
+
 }

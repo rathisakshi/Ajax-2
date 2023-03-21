@@ -56,17 +56,5 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] === 'POST' ) {
 
 
 
-    // $sql = "INSERT INTO Registrations (firstname, lastname, email, password) 
-    // VALUES ('$firstName', '$lastName', '$email', '$password')";
-
-    // if ( $conn->query( $sql ) ) {
-    //     $return_arr[] = array(
-    //         'success' => true,
-    //         'message' => 'Registered successfully'
-    //     );
-    //     echo json_encode( $return_arr );
-
-    // }
-
 
 

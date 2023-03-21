@@ -9,12 +9,23 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] === 'POST' ) {
         exit;
     }
     $Title = $_POST[ 'Title' ];
+    if ( strlen($Title)>40) {
+        $result_arr[] = array( 'message'=>'Length allowed: 40 characters' );
+        echo json_encode( $result_arr );
+        exit;
+    }
+
     $Description = $_POST[ 'Description' ];
+    if ( strlen($Description)>150) {
+        $result_arr[] = array( 'message'=>'Length allowed: 150 characters' );
+        echo json_encode( $result_arr );
+        exit;
+    }
     $sql = "CREATE TABLE IF NOT EXISTS Post (
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        Title VARCHAR(100) NOT NULL,
-        Description VARCHAR(100) NOT NULL,
-        userid VARCHAR(100) NOT NULL
+        Title VARCHAR(40) NOT NULL,
+        Description VARCHAR(200) NOT NULL,
+        userid INT(100) NOT NULL
 
     )";
 
@@ -54,7 +65,8 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] === 'POST' ) {
             );
         }
         echo json_encode( $return_arr );
-    } 
+    }
+
     // else {
     //     echo '0 results';
     // }
