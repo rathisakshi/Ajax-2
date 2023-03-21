@@ -18,6 +18,12 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] === 'POST' ) {
     }
     $email = $_POST[ 'email' ];
     $password = $_POST[ 'password' ];
+    if ( !( preg_match( '/^(?=.*[!@#$%^&*()\-_=+{}\[\]\\|;:\'",.<>\/?])(?=.{8,})/', $password ) ) ) {
+        $result_arr[] = array( 'message'=>'Password should be 8 characters long with a special character' );
+        echo json_encode( $result_arr );
+        exit;
+    }
+
 
     $query = "SELECT `email` FROM $tbname";
     $result = $conn -> query( $query );

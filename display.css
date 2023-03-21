@@ -99,3 +99,10 @@ tr:nth-child(even) {
     /* box-shadow: 0 -1px 0 rgb(255 255 255 / 10%) inset; */
     margin-bottom: 10px;
 }
+.update-addnew{
+    background-color: paleturquoise;
+  color: black;
+  margin-left: 251px;
+  font-size: 17px;
+  padding: 5px;
+}
