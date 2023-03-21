@@ -1,5 +1,6 @@
 $(document).ready(function () {
   $('#form').submit(function (event) { // changed selector to #login
+    event.preventDefault();
 
     var formloginData = {
       email: $('#username').val(),
@@ -13,9 +14,12 @@ $(document).ready(function () {
       dataType: 'json',
       encode: true,
       success: function (response) {
-        if (response) {
-          window.location.href = "display.html";
-        }
+        console.log(response);
+        // if (response.success == true) {
+        //   window.location.href = "display.html";
+        // } else{
+        //   alert("Invalid user");
+        // }
       },
       error: function (xhr, status, error) {
         console.log("Error:", error);

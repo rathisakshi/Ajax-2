@@ -28,3 +28,4 @@ $createtb = "CREATE TABLE IF NOT EXISTS Registrations (
 if ( $conn->query( $createtb ) !== TRUE ) {
 echo 'Error creating table: ' . $conn->error;
 }
+?>

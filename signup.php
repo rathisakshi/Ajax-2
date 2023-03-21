@@ -30,21 +30,37 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] === 'POST' ) {
             }
         }
     }
-    $sql = "INSERT INTO Registrations (firstname, lastname, email, password) 
-    VALUES ('$firstName', '$lastName', '$email', '$password')";
-    
-    if ($conn->query($sql) ) {
+
+    $stmt = $conn->prepare("INSERT INTO Registrations (firstname, lastname, email, password) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $firstName, $lastName, $email, $password);
+    if ($stmt->execute()) {
         $return_arr[] = array(
             'success' => true,
             'message' => 'Registered successfully'
         );
-        echo json_encode( $return_arr );
-
-    }
-
-    
+        echo json_encode($return_arr);
+        exit;
         
-        
+     } else {
+        throw new Exception("Unable to register");
+     }
+     
+ }
 
-}
+
+
+
+    // $sql = "INSERT INTO Registrations (firstname, lastname, email, password) 
+    // VALUES ('$firstName', '$lastName', '$email', '$password')";
+
+    // if ( $conn->query( $sql ) ) {
+    //     $return_arr[] = array(
+    //         'success' => true,
+    //         'message' => 'Registered successfully'
+    //     );
+    //     echo json_encode( $return_arr );
+
+    // }
+
+
 
