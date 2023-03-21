@@ -1,89 +1,42 @@
 <?php
-
 include 'connection.php';
+$return_array = array();
 
-if ( $_SERVER[ 'REQUEST_METHOD' ] === 'POST' ) {
-    $username = $_POST[ 'email' ];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username1 = $_POST['email'];
 
-    $password = $_POST[ 'password' ];
+    $password1 = $_POST['password'];
 
-    $conn->select_db( $dbname );
+    $query1 = "SELECT * FROM `Registrations`";
+    $result = $conn->query($query1);
 
-    $query = 'SELECT `email`,`password` FROM Registrations';
-    $result = $conn->query( $query );
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $db_email = $row['email'];
+            $db_password = $row['password'];
 
-    if ( $result === false ) {
-        // display any database errors
-        echo 'Error: ' . mysqli_error( $conn );
-        exit;
-    }
+            $db_array = array("username" => $db_email,
+                "password" => $db_password);
 
-    // fetch all rows into an array
-    // while( $row = $result->fetch_assoc() ) {
-    //     if ( checkusername( $row[ 'email' ], $username ) ) {
-    //         echo "<pre>";print_r($_POST);exit;
-    //         if ( checkpassword( $row[ 'password' ], $password ) ) {
-    //             $return_arr[] = array(
-    //                 'success' => true
-    //             );
-    //             echo json_encode( $return_arr );
-    //             exit;
-    //         } else {
-    //             $return_arr[] = array(
-    //                 'success' => false
-    //             );
-    //             echo json_encode( $return_arr );
-    //             exit;
-    //         }
-    //     } else {
-    //         $return_arr[] = array(
-    //             'success' => false
-    //         );
-    //         echo json_encode( $return_arr );
-    //         exit;
-    //     }
-
-    // }
-    while( $row = $result->fetch_assoc() ) {
-        if ( $row[ 'email' ] ==  $username  ) {
-            // echo "<pre>";print_r($_POST);exit;
-            if ( $row[ 'password' ] ==  $password  )  {
-                $return_arr[] = array(
-                    'success' => true
-                );
-                echo json_encode( $return_arr );
-                exit;
-            } else {
-                $return_arr[] = array(
-                    'success' => false
-                );
-                echo json_encode( $return_arr );
-                exit;
-            }
-        } else {
-            $return_arr[] = array(
-                'success' => false
-            );
-            echo json_encode( $return_arr );
-            exit;
+            array_push($return_array, $db_array);
         }
 
+        $len = count($return_array);
+
+        for ($i = 0; $i < $len; $i++) {
+            $username = $return_array[$i]['username'];
+            $password = $return_array[$i]['password'];
+
+            if ($username1 == $username && $password1 == $password) {
+                $return_arr['success'] = true;
+                echo json_encode($return_arr);
+                exit;
+            }
+        }
     }
 
+    $return_arr['success'] = false;
+    $return_arr['message'] = "This is wrong ";
+    echo json_encode($return_arr);
+    exit;
 }
-
-// function checkpassword( $rows, $password ) {
-//     if ( $rows == $password ) {
-//         return true;
-//     }
-//     return false;
-// }
-
-// function checkusername( $rows, $username ) {
-//     if ( $rows == $username ) {
-//         return true;
-//     }
-
-//     return false;
-// }
-?>

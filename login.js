@@ -3,28 +3,28 @@ $(document).ready(function () {
     event.preventDefault();
 
     var formloginData = {
-      email: $('#username').val(),
+      email: $('#email').val(),
       password: $('#password').val()
     };
 
     $.ajax({
-      type: 'POST',
+
       url: 'login.php',
+      type: 'POST',
       data: formloginData,
-      dataType: 'json',
-      encode: true,
+      dataType: 'JSON',
       success: function (response) {
-        console.log(response);
-        // if (response.success == true) {
-        //   window.location.href = "display.html";
-        // } else{
-        //   alert("Invalid user");
-        // }
+        console.log(response.success);
+        console.log(response.message);
+        if (response.success == true) {
+          window.location.href = "display.html";
+        } else{
+          alert("Invalid user");
+        }
       },
       error: function (xhr, status, error) {
-        console.log("Error:", error);
+        console.log("Alert!!!" + error);
       }
     });
-    event.preventDefault();
   });
 });
